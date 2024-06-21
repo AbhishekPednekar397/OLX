@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarsWorld</title>
+    <title>Contact Us - CarsWorld</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
         }
 
         .background {
-            background: url('https://www.motortrend.com/uploads/sites/5/2021/06/2021-Bentley-Flying-Spur-V8-vs-2021-Rolls-Royce-Ghost-26.jpg') no-repeat center center/cover;
+            background: url('https://t3.ftcdn.net/jpg/05/30/96/04/360_F_530960431_c8fPd3HansYvrSJ4fJxZqp9OhjQmYoll.jpg') no-repeat center center/cover;
             height: 100vh;
             position: relative;
             color: white;
@@ -70,7 +70,7 @@
         .content {
             position: relative;
             z-index: 1;
-            top: 50%;
+            top: 40%;
             transform: translateY(-50%);
             animation: fadeInUp 1.5s ease-in-out;
         }
@@ -80,22 +80,51 @@
             margin-bottom: 20px;
         }
 
-        .content p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
+        .form-container {
+            background: rgba(255, 255, 255, 0.2); /* Transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+            width: 90%;
+            max-width: 500px;
+            animation: scaleUp 1s ease-in-out;
         }
 
-        .cta-button {
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .submit-button {
             background-color: #ffcc00;
             color: black;
             padding: 10px 20px;
             text-decoration: none;
             font-size: 1.2em;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
 
-        .cta-button:hover {
+        .submit-button:hover {
             background-color: #e6b800;
             transform: scale(1.05);
         }
@@ -114,6 +143,11 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -123,15 +157,38 @@
             <h1 class="logo">CarsWorld</h1>
             <nav>
                 <ul>
-                    <li><a href="/check">Know Your Car Price</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#contact-us">Contact Us</a></li>
                 </ul>
             </nav>
         </header>
         <div class="content">
-            <h2>Welcome to CarsWorld</h2>
-            <p>Your destination for the best second-hand car prices.</p>
-            <a href="/check" class="cta-button">Know Your Car Price</a>
+            <h2>Contact Us</h2>
+            <div class="form-container">
+                <form action="/contact" method="POST">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" required>                            
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>

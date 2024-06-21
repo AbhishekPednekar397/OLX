@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CarsWorld</title>
+    <title>Thank You - CarsWorld</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +17,7 @@
         }
 
         .background {
-            background: url('https://www.motortrend.com/uploads/sites/5/2021/06/2021-Bentley-Flying-Spur-V8-vs-2021-Rolls-Royce-Ghost-26.jpg') no-repeat center center/cover;
+            background: url('https://t4.ftcdn.net/jpg/02/67/95/99/360_F_267959978_mg8IbiXMiL636E8GgZP2RC7zaCrMOLF1.jpg') no-repeat center center/cover;
             height: 100vh;
             position: relative;
             color: white;
@@ -80,22 +80,41 @@
             margin-bottom: 20px;
         }
 
-        .content p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
+        .message-container {
+            background: rgba(255, 255, 255, 0.2); /* Transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+            width: 90%;
+            max-width: 500px;
+            animation: scaleUp 1s ease-in-out;
+            margin-top: 20px;
         }
 
-        .cta-button {
+        .message-container p {
+            font-size: 1.2em;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .home-button {
             background-color: #ffcc00;
             color: black;
             padding: 10px 20px;
             text-decoration: none;
             font-size: 1.2em;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            text-align: center;
         }
 
-        .cta-button:hover {
+        .home-button:hover {
             background-color: #e6b800;
             transform: scale(1.05);
         }
@@ -114,6 +133,11 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
     </style>
 </head>
 <body>
@@ -123,15 +147,18 @@
             <h1 class="logo">CarsWorld</h1>
             <nav>
                 <ul>
-                    <li><a href="/check">Know Your Car Price</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="/contact">Contact Us</a></li>
                 </ul>
             </nav>
         </header>
         <div class="content">
-            <h2>Welcome to CarsWorld</h2>
-            <p>Your destination for the best second-hand car prices.</p>
-            <a href="/check" class="cta-button">Know Your Car Price</a>
+            <h2>Thank You for Contacting Us!</h2>
+            <div class="message-container">
+                <p>We have received your message and will get back to you soon.</p>
+                <p>In the meantime, feel free to browse our website or contact us again if you have any further questions.</p>
+                <a href="/" class="home-button">Back to Home</a>
+            </div>
         </div>
     </div>
 </body>
