@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarsWorld</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+        }
+
+        .background {
+            background: url('https://www.motortrend.com/uploads/sites/5/2021/06/2021-Bentley-Flying-Spur-V8-vs-2021-Rolls-Royce-Ghost-26.jpg') no-repeat center center/cover;
+            height: 100vh;
+            position: relative;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            animation: slideDown 1s ease-in-out;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="overlay"></div>
+        <header>
+            <h1 class="logo">CarsWorld</h1>
+            <nav>
+                <ul>
+                    <li><a href="#know-your-car">Know Your Car Price</a></li>
+                    <li><a href="#contact-us">Contact Us</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="content">
+            <h2>Welcome to CarsWorld</h2>
+            <p>Your destination for the best second-hand car prices.</p>
+            <a href="#know-your-car" class="cta-button">Know Your Car Price</a>
+        </div>
+    </div>
+</body>
+</html>
