@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Prediction - CarsWorld</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .background {
+            background: url('https://www.topgear.com/sites/default/files/2024/05/2-Aston-Martin-Vantage-2024-review.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            position: relative;
+            color: white;
+            text-align: center;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        header {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            animation: slideDown 1s ease-in-out;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            top: 15%;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .content h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            text-align: left;
+            width: 90%;
+            max-width: 500px;
+            margin-top: 50px;
+            animation: scaleUp 1s ease-in-out;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: #ffcc00;
+            color: black;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .submit-button:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0.8); }
+            to { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="overlay"></div>
+        <header>
+            <h1 class="logo">CarsWorld</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div class="content">
+            <h2>Car Price Prediction</h2>
+            <div class="form-container" id="prediction-form">
+                <form action="/check" method="POST">
+                    <div class="form-group">
+                        <label for="make">Make</label>
+                        <select id="make" name="make" required>
+                            <option value="">Select Make</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Suzuki">Suzuki</option>
+                            <option value="Daihatsu">Daihatsu</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Hyundai">Hyundai</option>
+                            <option value="Mitsubishi">Mitsubishi</option>
+                            <option value="KIA">KIA</option>
+                            <option value="Changan">Changan</option>
+                            <option value="FAW">FAW</option>
+                            <option value="Mercedes">Mercedes</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Model</label>
+                        <select id="model" name="model" required>
+                            <option value="">Select Model</option>
+                            <option value="Passo">Passo</option>
+                            <option value="Ravi">Ravi</option>
+                            <option value="Bolan">Bolan</option>
+                            <option value="Move">Move</option>
+                            <option value="Swift">Swift</option>
+                            <option value="Wagon R">Wagon R</option>
+                            <option value="Mira">Mira</option>
+                            <option value="City IDSI">City IDSI</option>
+                            <option value="Cultus VXR">Cultus VXR</option>
+                            <option value="Every">Every</option>
+                            <option value="Corolla XLI">Corolla XLI</option>
+                            <option value="Baleno">Baleno</option>
+                            <option value="City Vario">City Vario</option>
+                            <option value="Terios Kid">Terios Kid</option>
+                            <option value="Civic Prosmetic">Civic Prosmetic</option>
+                            <option value="City IVTEC">City IVTEC</option>
+                            <option value="Santro">Santro</option>
+                            <option value="Corolla Altis">Corolla Altis</option>
+                            <option value="City Aspire">City Aspire</option>
+                            <option value="Mehran VXR">Mehran VXR</option>
+                            <option value="Cuore">Cuore</option>
+                            <option value="Pajero Mini">Pajero Mini</option>
+                            <option value="Picanto">Picanto</option>
+                            <option value="Alto">Alto</option>
+                            <option value="Karvaan">Karvaan</option>
+                            <option value="X-PV">X-PV</option>
+                            <option value="Hijet">Hijet</option>
+                            <option value="Ek Wagon">Ek Wagon</option>
+                            <option value="Altis Grande">Altis Grande</option>
+                            <option value="E Class">E Class</option>
+                            <option value="Yaris">Yaris</option>
+                            <option value="Lancer">Lancer</option>
+                            <option value="Corolla GLI">Corolla GLI</option>
+                            <option value="Joy">Joy</option>
+                            <option value="Civic Oriel">Civic Oriel</option>
+                            <option value="Classic">Classic</option>
+                            <option value="Spectra">Spectra</option>
+                            <option value="V2">V2</option>
+                            <option value="Minicab Bravo">Minicab Bravo</option>
+                            <option value="Corolla Assista">Corolla Assista</option>
+                            <option value="Alsvin">Alsvin</option>
+                            <option value="C Class">C Class</option>
+                            <option value="Minica">Minica</option>
+                            <option value="Exclusive">Exclusive</option>
+                            <option value="Civic VTi">Civic VTi</option>
+                            <option value="Cervo">Cervo</option>
+                            <option value="Sportage">Sportage</option>
+                            <option value="Corolla Axio">Corolla Axio</option>
+                            <option value="Every Wagon">Every Wagon</option>
+                            <option value="Liana">Liana</option>
+                            <option value="Civic EXi">Civic EXi</option>
+                            <option value="Surf">Surf</option>
+                            <option value="Mehran VX">Mehran VX</option>
+                            <option value="Civic VTi Oriel">Civic VTi Oriel</option>
+                            <option value="Khyber">Khyber</option>
+                            <option value="Cultus VXL">Cultus VXL</option>
+                            <option value="Prius">Prius</option>
+                            <option value="ISIS">ISIS</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <select id="year" name="year" required>
+                            <option value="">Select Year</option>
+                            <option value="2021">2021</option>
+                            <option value="2018">2018</option>
+                            <option value="2015">2015</option>
+                            <option value="2013">2013</option>
+                            <option value="2011">2011</option>
+                            <option value="2020">2020</option>
+                            <option value="2016">2016</option>
+                            <option value="2004">2004</option>
+                            <option value="2008">2008</option>
+                            <option value="2007">2007</option>
+                            <option value="2006">2006</option>
+                            <option value="2023">2023</option>
+                            <option value="2014">2014</option>
+                            <option value="2019">2019</option>
+                            <option value="2009">2009</option>
+                            <option value="2017">2017</option>
+                            <option value="2012">2012</option>
+                            <option value="2005">2005</option>
+                            <option value="2003">2003</option>
+                            <option value="2010">2010</option>
+                            <option value="2022">2022</option>
+                            <option value="2002">2002</option>
+                            <option value="2001">2001</option>
+                            <option value="2000">2000</option>
+                            <option value="1993">1993</option>
+                            <option value="1989">1989</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kms-driven">KM's Driven</label>
+                        <input type="number" id="kms-driven" name="kms_driven" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fuel">Fuel</label>
+                        <select id="fuel" name="fuel" required>
+                            <option value="">Select Fuel</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="CNG">CNG</option>
+                            <option value="Hybrid">Hybrid</option>
+                            <option value="Diesel">Diesel</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="registration-city">Registration City</label>
+                        <select id="registration-city" name="registration_city" required>
+                            <option value="">Select Registration City</option>
+                            <option value="Unregistered">Unregistered</option>
+                            <option value="Karachi">Karachi</option>
+                            <option value="Lahore">Lahore</option>
+                            <option value="Sindh">Sindh</option>
+                            <option value="Faisalabad">Faisalabad</option>
+                            <option value="Islamabad">Islamabad</option>
+                            <option value="Sialkot">Sialkot</option>
+                            <option value="Gujranwala">Gujranwala</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Multan">Multan</option>
+                            <option value="Rawalpindi">Rawalpindi</option>
+                            <option value="Bahawalpur">Bahawalpur</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Rahimyar Khan">Rahimyar Khan</option>
+                            <option value="Chishtian Mandi">Chishtian Mandi</option>
+                            <option value="Chiniot">Chiniot</option>
+                            <option value="Wazirabad">Wazirabad</option>
+                            <option value="Sahiwal">Sahiwal</option>
+                            <option value="Gujrat">Gujrat</option>
+                            <option value="Abbottabad">Abbottabad</option>
+                            <option value="Khanewal">Khanewal</option>
+                            <option value="Peshawar">Peshawar</option>
+                            <option value="Sargodha">Sargodha</option>
+                            <option value="Bannu">Bannu</option>
+                            <option value="Nowshera">Nowshera</option>
+                            <option value="Kasur">Kasur</option>
+                            <option value="Arifwala">Arifwala</option>
+                            <option value="Jhang Sadar">Jhang Sadar</option>
+                            <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+                            <option value="Mardan">Mardan</option>
+                            <option value="Attock">Attock</option>
+                            <option value="Larkana">Larkana</option>
+                            <option value="Unknown">Unknown</option>
+                            <option value="Jhelum">Jhelum</option>
+                            <option value="Khanpur">Khanpur</option>
+                            <option value="Wah">Wah</option>
+                            <option value="Okara">Okara</option>
+                            <option value="Bhakkar">Bhakkar</option>
+                            <option value="Sheikhüpura">Sheikhüpura</option>
+                            <option value="Swat">Swat</option>
+                            <option value="Dera Ismail Khan">Dera Ismail Khan</option>
+                            <option value="Khushab">Khushab</option>
+                            <option value="Bhimber">Bhimber</option>
+                            <option value="Mansehra">Mansehra</option>
+                            <option value="Mirpur">Mirpur</option>
+                            <option value="Quetta">Quetta</option>
+                            <option value="Vehari">Vehari</option>
+                            <option value="Hafizabad">Hafizabad</option>
+                            <option value="Charsadda">Charsadda</option>
+                            <option value="Toba Tek singh">Toba Tek singh</option>
+                            <option value="Jaranwala">Jaranwala</option>
+                            <option value="Pirmahal">Pirmahal</option>
+                            <option value="Haripur">Haripur</option>
+                            <option value="Mirpur Khas">Mirpur Khas</option>
+                            <option value="Bahawalnagar">Bahawalnagar</option>
+                            <option value="Swabi">Swabi</option>
+                            <option value="Dadu">Dadu</option>
+                            <option value="Mianwali">Mianwali</option>
+                            <option value="Sukkar">Sukkar</option>
+                            <option value="Badin">Badin</option>
+                            <option value="Nawabshah">Nawabshah</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="car-documents">Car Documents</label>
+                        <select id="car-documents" name="car_documents" required>
+                            <option value="">Select Car Documents</option>
+                            <option value="Original">Original</option>
+                            <option value="Duplicate">Duplicate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="assembly">Assembly</label>
+                        <select id="assembly" name="assembly" required>
+                            <option value="">Select Assembly</option>
+                            <option value="Imported">Imported</option>
+                            <option value="Local">Local</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transmission">Transmission</label>
+                        <select id="transmission" name="transmission" required>
+                            <option value="">Select Transmission</option>
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
